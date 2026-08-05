@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "param1": { "min": 0, "max": 1500, "unit": "" },
+    "param2": { "min": 0, "max": 200, "unit": "" },
+    "param3": { "min": 0, "max": 10000, "unit": "" },
+    "param4": { "min": -500, "max": 500, "unit": "" },
+    "param5": { "min": 45, "max": 55, "unit": "" }
+  },
+  "alert_rules": [
+    { "param": "param1", "condition": "gt", "threshold_pct": 0.80, "severity": "warning" },
+    { "param": "param1", "condition": "gt", "threshold_pct": 0.90, "severity": "critical" },
+    { "param": "param2", "condition": "lt_pct", "threshold_pct": 0.10, "severity": "warning" }
+  ],
+  "data_interval_seconds": 300,
+  "ml_engine_url": "http://ml-engine:8001"
+}
