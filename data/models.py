@@ -47,8 +47,14 @@ class ProcessingJob(models.Model):
 
     
 class ProcessedData(models.Model):
-    raw_data = models.OneToOneField(RawData, on_delete=models.CASCADE, related_name='processed_data')
-    job = models.ForeignKey(ProcessingJob, on_delete=models.CASCADE, related_name='processing_data')
+    raw_data = models.OneToOneField(
+        RawData,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='processed_data'
+    )
+    job = models.ForeignKey(ProcessingJob, on_delete=models.CASCADE, related_name='processed_data')
 
     timestamp = models.DateTimeField()
     param1 = models.FloatField()
@@ -57,6 +63,7 @@ class ProcessedData(models.Model):
     param4 = models.FloatField()
     param5 = models.FloatField()
     unit_id = models.CharField(max_length=50, blank=True, null=True)
+    equipment_status = models.CharField(max_length=50, blank=True, null=True)
 
     param1_ma5m = models.FloatField(null=True, blank=True)
     param1_ma15m = models.FloatField(null=True, blank=True)
