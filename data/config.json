@@ -12,5 +12,6 @@
     { "param": "param2", "condition": "lt_pct", "threshold_pct": 0.10, "severity": "warning" }
   ],
   "data_interval_seconds": 300,
+  "window_size": 288,
   "ml_engine_url": "http://ml-engine:8001"
 }

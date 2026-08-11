@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import shutil
+import uuid
 
 
 def read_csv_files(folder_path='datasets/incoming/', processed_path='datasets/processed/'):
@@ -22,7 +23,10 @@ def read_csv_files(folder_path='datasets/incoming/', processed_path='datasets/pr
             shutil.move(filepath, os.path.join(processed_path, file))
 
     if all_data:
-        return pd.concat(all_data, ignore_index=True)
+        dataframe = pd.concat(all_data, ignore_index=True)
+        dataframe['record_id'] = [str(uuid.uuid4()) for _ in range(len(dataframe))]
+        return dataframe
+        
     return pd.DataFrame()
 
     

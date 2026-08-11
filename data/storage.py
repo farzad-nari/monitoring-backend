@@ -15,20 +15,22 @@ def save_raw_data(dataframe):
             param4=row['param4'],
             param5=row['param5'],
             unit_id=row.get('unit_id'),
-            equipment_status=row.get('equipment_status')
+            equipment_status=row.get('equipment_status'),
+            record_id=row.get('record_id')
         ))
 
     RawData.objects.bulk_create(records)
 
 
-def save_processed_data(dataframe, job):
+def save_processed_data(dataframe):
     if dataframe.empty:
         return
 
     records = []
     for _, row in dataframe.iterrows():
+        raw_data = RawData.objects.filter(record_id=row.get('record_id')).first() if row.get('record_id') else None
         records.append(ProcessedData(
-            job=job,
+            raw_data=raw_data,
             timestamp=row['timestamp'],
             param1=row['param1'],
             param2=row['param2'],

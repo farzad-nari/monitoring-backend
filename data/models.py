@@ -3,6 +3,7 @@ import uuid
 
 
 class RawData(models.Model):
+    record_id = models.UUIDField(unique=True, editable=False)
     timestamp = models.DateTimeField()
     param1 = models.FloatField()
     param2 = models.FloatField()
@@ -47,6 +48,7 @@ class ProcessingJob(models.Model):
 
     
 class ProcessedData(models.Model):
+    record_id = models.UUIDField(unique=True, null=True, blank=True, editable=False)
     raw_data = models.OneToOneField(
         RawData,
         on_delete=models.CASCADE,
@@ -54,7 +56,7 @@ class ProcessedData(models.Model):
         blank=True,
         related_name='processed_data'
     )
-    job = models.ForeignKey(ProcessingJob, on_delete=models.CASCADE, related_name='processed_data')
+    job = models.ManyToManyField(ProcessingJob, blank=True, related_name='processed_data')
 
     timestamp = models.DateTimeField()
     param1 = models.FloatField()

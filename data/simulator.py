@@ -11,7 +11,7 @@ def generate_simulated_data(num_records=100, output_dir='datasets/incoming/'):
     for i in range(num_records):
         timestamp = start_time + timedelta(minutes=i)
         data.append({
-            'timestamp': timestamp.isoformat(),
+            'timestamp': timestamp.strftime('%Y-%m-%dT%H:%M:%S') + '+00:00',
             'param1': random.uniform(100, 300),
             'param2': random.uniform(40, 80),
             'param3': random.uniform(1000, 2000),
