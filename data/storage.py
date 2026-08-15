@@ -31,6 +31,7 @@ def save_processed_data(dataframe):
         raw_data = RawData.objects.filter(record_id=row.get('record_id')).first() if row.get('record_id') else None
         records.append(ProcessedData(
             raw_data=raw_data,
+            record_id=row.get('record_id'), 
             timestamp=row['timestamp'],
             param1=row['param1'],
             param2=row['param2'],
