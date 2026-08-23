@@ -10,7 +10,6 @@ class AnalysisResult(models.Model):
     risk_score = models.FloatField(null=True, blank=True)
     risk_level = models.CharField(max_length=50, null=True, blank=True)
     risk_breakdown = models.JSONField(null=True, blank=True)
-    confidence = models.FloatField(null=True, blank=True)
     anomalies = models.JSONField(null=True, blank=True)
     decisions = models.JSONField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
