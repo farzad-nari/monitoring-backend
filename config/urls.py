@@ -17,11 +17,33 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+)
+from drf_spectacular.utils import extend_schema
 
+
+# Tags
+TokenObtainPairView = extend_schema(tags=['auth'])(TokenObtainPairView)
+TokenRefreshView = extend_schema(tags=['auth'])(TokenRefreshView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('api/v1/data/', include('data.urls')),
     path('api/v1/alerts/', include('alerts.urls')),
     path('api/v1/analysis/', include('analysis.urls')),
+
+    # JWT
+    path('api/v1/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    # Swagger
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]
