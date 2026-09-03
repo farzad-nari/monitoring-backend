@@ -13,5 +13,5 @@
   ],
   "data_interval_seconds": 300,
   "window_size": 288,
-  "ml_engine_url": "http://ml-engine:8001"
+  "ml_engine_url": "http://localhost:8001"
 }
